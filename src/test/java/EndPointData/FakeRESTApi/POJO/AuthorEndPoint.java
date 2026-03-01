@@ -1,4 +1,4 @@
-package EndPointData.FakeRESTApi;
+package EndPointData.FakeRESTApi.POJO;
 
 public interface AuthorEndPoint {
     String GET = "/Authors";

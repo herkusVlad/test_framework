@@ -28,7 +28,7 @@ jobs:
           cache: maven
 
       - name: Run Tests with Maven
-        run: mvn clean test
+        run: mvn clean test -DthreadCount=5
         continue-on-error: true
 
       - name: Generate Allure Report
