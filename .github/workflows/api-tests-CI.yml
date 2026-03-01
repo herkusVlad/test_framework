@@ -45,39 +45,39 @@ jobs:
           path: target/site/allure-maven-plugin
           retention-days: 1
 
-#      - name: Post Allure Report summary
-#        uses: actions/github-script@v7
-#        if: always() && github.event_name == 'pull_request'
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          script: |
-#            const fs = require('fs');
-#
-#            const path = 'target/site/allure-maven-plugin/widgets/summary.json';
-#
-#            if (fs.existsSync(path)) {
-#              const summary = JSON.parse(fs.readFileSync(path, 'utf8'));
-#              const passed = summary.statistic.passed || 0;
-#              const failed = summary.statistic.failed || 0;
-#              const broken = summary.statistic.broken || 0;
-#              const skipped = summary.statistic.skipped || 0;
-#              const total = summary.statistic.total || 0;
-#
-#              const body = `### 📊 Allure Report Summary\n` +
-#                           `| Total | Passed ✅ | Failed ❌ | Broken ⚠️ | Skipped ⏭️ |\n` +
-#                           `|-------|-----------|-----------|-----------|------------|\n` +
-#                           `| **${total}** | ${passed} | ${failed} | ${broken} | ${skipped} |\n\n` +
-#                           `[🔗 Посмотреть полный Allure Report](https://${context.repo.owner}.github.io/${context.repo.repo}/)`;
-#
-#              await github.rest.issues.createComment({
-#                issue_number: context.issue.number,
-#                owner: context.repo.owner,
-#                repo: context.repo.repo,
-#                body: body
-#              });
-#            } else {
-#              console.log("Summary file not found!");
-#            }
+      - name: Post Allure Report summary
+        uses: actions/github-script@v7
+        if: always() && github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+
+            const path = 'target/site/allure-maven-plugin/widgets/summary.json';
+
+            if (fs.existsSync(path)) {
+              const summary = JSON.parse(fs.readFileSync(path, 'utf8'));
+              const passed = summary.statistic.passed || 0;
+              const failed = summary.statistic.failed || 0;
+              const broken = summary.statistic.broken || 0;
+              const skipped = summary.statistic.skipped || 0;
+              const total = summary.statistic.total || 0;
+
+              const body = `### 📊 Allure Report Summary\n` +
+                           `| Total | Passed ✅ | Failed ❌ | Broken ⚠️ | Skipped ⏭️ |\n` +
+                           `|-------|-----------|-----------|-----------|------------|\n` +
+                           `| **${total}** | ${passed} | ${failed} | ${broken} | ${skipped} |\n\n` +
+                           `[🔗 Посмотреть полный Allure Report](https://${context.repo.owner}.github.io/${context.repo.repo}/)`;
+
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            } else {
+              console.log("Summary file not found!");
+            }
 
       - name: Deploy Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
