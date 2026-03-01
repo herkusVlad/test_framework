@@ -8,6 +8,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface TestData {
-    String link();
-    String issue();
+    String id();
+    String description() default "";
+    String epic() default "";
+    String issue() default "";
+    String suite() default "";
 }
