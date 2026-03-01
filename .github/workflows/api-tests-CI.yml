@@ -65,7 +65,7 @@ jobs:
                            `| Total | Passed ✅ | Failed ❌ | Broken ⚠️ | Skipped ⏭️ |\n` +
                            `|-------|-----------|-----------|-----------|------------|\n` +
                            `| **${total}** | ${passed} | ${failed} | ${broken} | ${skipped} |\n\n` +
-                           `               [🔗 Open full Allure Report](https://${context.repo.owner}.github.io/${context.repo.repo}/)`;
+                           `[🔗 Open full Allure Report](https://${context.repo.owner}.github.io/${context.repo.repo}/)`;
 
               await github.rest.issues.createComment({
                 issue_number: context.issue.number,
